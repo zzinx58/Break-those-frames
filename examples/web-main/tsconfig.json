@@ -11,8 +11,22 @@
     "esModuleInterop": true,
     "lib": ["ESNext", "DOM"],
     "skipLibCheck": true,
-    "noEmit": true
+    "noEmit": true,
+    //改动部分开始位置
+    "allowJs": false
+    // "baseUrl": ".",
+    // "paths": {
+    //   "@/*": ["src/*"]
+    // }
+    // "types": ["pinia-plugin-persist", "node"]
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue"
+    //elmessage
+    // "**/*.d.ts"
+  ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
