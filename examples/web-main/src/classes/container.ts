@@ -17,25 +17,16 @@ class Container{
     private outsideDiv: HTMLElement;
     // canvas渲染上下文
     protected renderingContext: CanvasRenderingContext2D;
-    constructor(element: string, width: number, height: number){
-        this.outsideDiv = document.getElementById(element);
+    // 构造函数，宽度和高度默认分别为400和300px
+    constructor(element: string, width: number = 400, height: number = 300){
+        this.outsideDiv = document.getElementById(element)!;
         this.canvasElement = document.createElement("canvas");
-        if(width === null){
-            this.width = 400;
-            this.canvasElement.style.width = '400';
-        }else{
-            this.width = width;
-            this.canvasElement.style.width = `${width}px`;
-        }
-        if(height === null){
-            this.height = 300;
-            this.canvasElement.style["height"] = "300";
-        }else{
-            this.height=height;
-            this.canvasElement.style["height"]= `${height}px`;
-        }
+        this.width = width;
+        this.canvasElement.style.width = `${width}px`;
+        this.height=height;
+        this.canvasElement.style["height"]= `${height}px`;
         this.display = true;
-        this.renderingContext = this.canvasElement.getContext('2d');
+        this.renderingContext = this.canvasElement.getContext('2d')!;
     };
     // 开始渲染，也就是把canvas放到div元素中。
     render(){
