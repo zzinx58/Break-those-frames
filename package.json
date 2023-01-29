@@ -20,7 +20,7 @@
     "pinia-plugin-persist": "^1.0.0",
     "screenfull": "^6.0.2",
     "vue": "^3.2.45",
-    "vue-router": "4"
+    "vue-router": "^4.1.6"
   },
   "devDependencies": {
     "@iconify-json/ep": "^1.1.8",
@@ -37,6 +37,10 @@
     "unplugin-icons": "^0.15.1",
     "unplugin-vue-components": "^0.22.12",
     "vite": "^4.0.0",
-    "vue-tsc": "^1.0.11"
+    "vite-plugin-mkcert": "^1.11.0",
+    "vite-plugin-mock": "^2.9.6",
+    "vue-tsc": "^1.0.11",
+    "workbox-core": "^6.5.4",
+    "workbox-window": "^6.5.4"
   }
 }
