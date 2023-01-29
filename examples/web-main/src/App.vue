@@ -1,29 +1,32 @@
-<script setup lang="ts">
-import { Container } from './classes/container';
-import { onMounted } from 'vue';
-function start(){
-  let mycanvas = new Container('a',300,400);
-  mycanvas.render();
-}
-onMounted(start);
-
-</script>
-
 <template>
+  <div>
+  </div>
   <div id="a">
+
   </div>
 </template>
 
+<script setup lang="ts">
+import {BarChart} from './classes/barChart'
+import {ChartData} from './classes/chartData'
+import { getTransitionRawChildren, onMounted } from 'vue';
+
+const data = [
+  new ChartData('a',5),
+  new ChartData('b',4),
+  new ChartData('c',3),
+  new ChartData('d',2),
+  new ChartData('e',3),
+];
+
+
+function start(){
+  let mycanvas = new BarChart('a',400,300,data);
+  mycanvas.render();
+}
+onMounted(start);
+</script>
+
 <style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
+
 </style>
