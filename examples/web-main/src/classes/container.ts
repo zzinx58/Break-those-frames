@@ -1,3 +1,5 @@
+import { ChartData } from "./chartData";
+
 export{
     Container
 }
@@ -17,14 +19,22 @@ class Container{
     private outsideDiv: HTMLElement;
     // canvas渲染上下文
     protected renderingContext: CanvasRenderingContext2D;
-    // 构造函数，宽度和高度默认分别为400和300px
+    // 数据，ChartData数组
+    public datas: ChartData[];
+    // 添加数据
+    public addData(data: ChartData): void;
+    public addData(data: ChartData[]): void;
+    public addData(data:any) {
+        this.datas.push(data);
+    }
+    // 构造函数，宽度和高度默认分别为400和300
     constructor(element: string, width: number = 400, height: number = 300){
         this.outsideDiv = document.getElementById(element)!;
         this.canvasElement = document.createElement("canvas");
         this.width = width;
-        this.canvasElement.style.width = `${width}px`;
+        this.canvasElement.width = width;
         this.height=height;
-        this.canvasElement.style["height"]= `${height}px`;
+        this.canvasElement.height= height;
         this.display = true;
         this.renderingContext = this.canvasElement.getContext('2d')!;
     };

@@ -6,20 +6,12 @@ export{
 }
 
 class BarChart extends Container{
-    // 所有的数据，可以是数据组，也可以是单个数据，不过现在只做了单个数据
-    public datas: ChartData[];
     // 每个条形的宽度，单位为像素
     private barWidth!: number;
     // 最大值，这样就可以设置每个像素的大小
     private maxValue!: number;
     // 每个值对应的canvas像素大小，这样就可以让统计图变得更合理
     private perPixel!: number;
-    // 添加数据，可以是一个ChartData变量或者一个ChartData数组
-    public addData(data: ChartData): void;
-    public addData(data: ChartData[]): void;
-    public addData(data:any) {
-        this.datas.push(data);
-    }
     // 构造函数
     constructor(element: string, width: number, height: number,data: ChartData[]) {
         super(element, width, height);
@@ -34,7 +26,6 @@ class BarChart extends Container{
         this.renderingContext.clearRect(0,0,this.width,this.height);
         for(let i = 0; i < this.datas.length;i++){
             this.renderingContext.fillStyle=colors[i];
-            // 这里稍微有一些bug，不知道如何修改QAQ
             const startX = i*this.barWidth;
             const startY = this.height - this.perPixel * this.datas[i].value;
             const rectHeight = Math.min(this.perPixel * this.datas[i].value, this.height);
