@@ -9,6 +9,9 @@ export default defineConfig({
   plugins: [
     vue(),
     AutoImport({ resolvers: [ElementPlusResolver()], imports: ["vue"] }),
-    Components({ resolvers: [ElementPlusResolver()] }),
+    Components({
+      resolvers: [ElementPlusResolver()],
+      dirs: ["src/components", "src/test"],
+    }),
   ],
 });
