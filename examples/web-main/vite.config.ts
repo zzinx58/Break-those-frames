@@ -8,7 +8,10 @@ import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
 export default defineConfig({
   plugins: [
     vue(),
-    AutoImport({ resolvers: [ElementPlusResolver()], imports: ["vue"] }),
+    AutoImport({
+      resolvers: [ElementPlusResolver()],
+      imports: ["vue"],
+    }),
     Components({
       resolvers: [ElementPlusResolver()],
       dirs: ["src/components", "src/test"],

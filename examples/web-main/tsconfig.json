@@ -24,9 +24,11 @@
     "src/**/*.ts",
     "src/**/*.d.ts",
     "src/**/*.tsx",
-    "src/**/*.vue"
+    "src/**/*.vue",
     //elmessage
     // "**/*.d.ts"
+    // unplugin-auto-import => include auto-imports.d.ts in this file.
+    "./*.d.ts"
   ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
