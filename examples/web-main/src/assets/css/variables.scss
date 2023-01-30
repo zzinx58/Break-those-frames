@@ -1,0 +1,7 @@
+// 高度100%，保证元素继承关系，使页面不超出
+html,
+body,
+#app {
+  box-sizing: border-box;
+  height: 100%;
+}
