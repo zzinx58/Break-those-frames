@@ -15,6 +15,7 @@ export default {
     // 路由
     const router = useRouter();
 
+    // 开始游戏
     const startGame = () => {
       router.push("/game");
     };

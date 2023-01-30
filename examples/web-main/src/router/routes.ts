@@ -7,7 +7,7 @@ const routes = [
   // 游戏开始页面
   {
     path: "/",
-    name: "start",
+    name: "home",
     component: Start,
   },
   {
