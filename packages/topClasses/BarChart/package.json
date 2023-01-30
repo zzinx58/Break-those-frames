@@ -1,0 +1,12 @@
+{
+  "name": "bar_chart",
+  "version": "1.0.0",
+  "description": "Break those frames org's BarChart class",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

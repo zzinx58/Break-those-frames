@@ -66,6 +66,24 @@ importers:
       workbox-window: registry.npmmirror.com/workbox-window/6.5.4
 
   examples/web-main:
+    specifiers:
+      bar_chart: workspace:^1.0.0
+    dependencies:
+      bar_chart: link:../../packages/topClasses/BarChart
+
+  packages/BarChart:
+    specifiers: {}
+
+  packages/Container:
+    specifiers: {}
+
+  packages/baseClasses/Rectangle:
+    specifiers: {}
+
+  packages/topClasses/BarChart:
+    specifiers: {}
+
+  packages/topClasses/Container:
     specifiers: {}
 
 packages:
