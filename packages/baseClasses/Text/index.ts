@@ -1,8 +1,9 @@
 export { Chart_Text_2D };
+export type { FontConfigOptions, Position_DrawItemOptions };
 type FontBasicConfigOptions = {
-  font_size: number;
+  font_size?: number;
   font_weight?: string;
-  font_family: string;
+  font_family?: string;
   message: string;
 };
 type FillTextConfigOption = {
@@ -86,8 +87,8 @@ class Chart_Text_2D {
     //And the 'style', 'variant', 'weight' must be in the front of the 'size'.
     //The 'family' must be specified at the end position.
     ctx.font = `${fontConfigOptions.font_weight ?? ""} ${
-      fontConfigOptions.font_size
-    }px ${fontConfigOptions.font_family}`;
+      fontConfigOptions.font_size ?? 10
+    }px ${fontConfigOptions.font_family ?? "sans-serif"}`;
     ctx.textAlign = positionOptions.textAlign ?? "start";
     ctx.textBaseline = positionOptions.textBaseLine ?? "alphabetic";
     if (positionOptions.rotate_radians) {
@@ -111,8 +112,8 @@ class Chart_Text_2D {
     ctx.save();
     ctx.fillStyle = fontConfigOptions.fillText_color ?? "#fff";
     ctx.font = `${fontConfigOptions.font_weight ?? ""} ${
-      fontConfigOptions.font_size
-    }px ${fontConfigOptions.font_family}`;
+      fontConfigOptions.font_size ?? 10
+    }px ${fontConfigOptions.font_family ?? "sans-serif"}`;
     ctx.textAlign = positionOptions.textAlign ?? "start";
     ctx.textBaseline = positionOptions.textBaseLine ?? "alphabetic";
     if (positionOptions.rotate_radians) {
