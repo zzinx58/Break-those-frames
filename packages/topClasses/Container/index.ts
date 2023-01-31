@@ -3,9 +3,10 @@ class CanvasContainer {
   //CanvasContainer's actual bearing element
   private containerDOM: HTMLElement;
   //CanvasContainer's Info realte to the viewport
-  public containerInfo_RelateToViewport: DOMRect;
+  private containerInfo_RelateToViewport: DOMRect;
   //CanvasContainer's Content：CanvasElement
   protected canvasElement: HTMLCanvasElement;
+  protected canvasSizeInfo: { height: number; width: number };
 
   constructor(containerDOM: HTMLElement) {
     this.containerDOM = containerDOM;
@@ -27,8 +28,13 @@ class CanvasContainer {
     const { height, width } = containerSizeInfo;
     const { borderWidth } = window.getComputedStyle(this.containerDOM);
     //If there is any border in containerDOM.
-    canvasElement.width = width - 2 * +borderWidth.replace("px", "");
-    canvasElement.height = height - 2 * +borderWidth.replace("px", "");
+    let canvasSizeInfo = {
+      height: height - 2 * +borderWidth.replace("px", ""),
+      width: width - 2 * +borderWidth.replace("px", ""),
+    };
+    canvasElement.width = canvasSizeInfo.width;
+    canvasElement.height = canvasSizeInfo.height;
+    this.canvasSizeInfo = canvasSizeInfo;
   }
 
   //TODO:For resize use.

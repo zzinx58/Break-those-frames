@@ -43,6 +43,8 @@ class Chart_Text_2D {
     this.canvasRendingContext2D = canvasRendingContext2D;
     this.position_drawItemOptions = position_drawItemOptions;
     // this.test();
+    console.log(this.position_drawItemOptions);
+
     this.main_drawText();
   }
 
@@ -130,7 +132,8 @@ class Chart_Text_2D {
         ? ctx.rotate(positionOptions.rotate_radians)
         : ctx.rotate(360 + positionOptions.rotate_radians));
     ctx.strokeText(
-      fontConfigOptions.message,
+      `${positionOptions.x_coordinate}, ${positionOptions.y_coordinate}`,
+      // fontConfigOptions.message,
       positionOptions.x_coordinate,
       positionOptions.y_coordinate
     );
@@ -153,7 +156,8 @@ class Chart_Text_2D {
         ? ctx.rotate(positionOptions.rotate_radians)
         : ctx.rotate(360 + positionOptions.rotate_radians));
     ctx.fillText(
-      fontConfigOptions.message,
+      `${positionOptions.x_coordinate}, ${positionOptions.y_coordinate}`,
+      // fontConfigOptions.message,
       positionOptions.x_coordinate,
       positionOptions.y_coordinate
     );
