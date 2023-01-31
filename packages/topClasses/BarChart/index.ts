@@ -13,8 +13,12 @@ class BarChart extends CanvasContainer {
   constructor(containerDOM: HTMLElement, barChartOptions: BarChartOptions) {
     super(containerDOM);
     this.barChartOptions = barChartOptions;
-    // console.log(this.containerInfo_RelateToViewport);
-    this.test();
+
+    this.test1();
+    this.test2();
+
+    console.log(this.canvasSizeInfo);
+    console.log(this.containerInfo_RelateToViewport);
   }
 
   private getRenderingContext(renderingContextId: string) {
@@ -24,7 +28,7 @@ class BarChart extends CanvasContainer {
     return this.renderingContext;
   }
 
-  private test() {
+  private test1() {
     const ctx = this.getRenderingContext("2d") as CanvasRenderingContext2D;
     // ctx.save();
     // ctx.strokeStyle = "fff";
@@ -33,6 +37,9 @@ class BarChart extends CanvasContainer {
     // ctx.lineTo(100, 100);
     // ctx.stroke();
     // ctx.restore();
+    // console.log(this.containerInfo_RelateToViewport.height);
+
+    //left_upper
     new Chart_Text_2D(
       ctx,
       {
@@ -40,10 +47,90 @@ class BarChart extends CanvasContainer {
         fillText_color: "#D9ACF5",
         strokeText_color: "#AAE3E2",
         font_family: "Arial",
-        font_size: 32,
+        font_size: 20,
         message: "Hello, world! 你好，世界！",
       },
-      { x_coordinate: 0, y_coordinate: 12 }
+      {
+        x_coordinate: 0,
+        y_coordinate: 0,
+        textBaseLine: "top",
+        textAlign: "start",
+      }
+    );
+    //right_upper
+    new Chart_Text_2D(
+      ctx,
+      {
+        font_weight: "bold",
+        fillText_color: "#D9ACF5",
+        strokeText_color: "#AAE3E2",
+        font_family: "Arial",
+        font_size: 20,
+        message: "Hello, world! 你好，世界！",
+      },
+      {
+        x_coordinate: this.canvasSizeInfo.width / 2,
+        y_coordinate: 0,
+        textBaseLine: "top",
+        textAlign: "end",
+      }
+    );
+    //left_bottom
+    new Chart_Text_2D(
+      ctx,
+      {
+        font_weight: "bold",
+        fillText_color: "#D9ACF5",
+        strokeText_color: "#AAE3E2",
+        font_family: "Arial",
+        font_size: 20,
+        message: "Hello, world! 你好，世界！",
+      },
+      {
+        x_coordinate: 0,
+        y_coordinate: this.canvasSizeInfo.height / 2,
+        textBaseLine: "bottom",
+        textAlign: "start",
+      }
+    );
+    //right_bottom
+    new Chart_Text_2D(
+      ctx,
+      {
+        font_weight: "bold",
+        fillText_color: "#D9ACF5",
+        strokeText_color: "#AAE3E2",
+        font_family: "Arial",
+        font_size: 20,
+        message: "Hello, world! 你好，世界！",
+      },
+      {
+        x_coordinate: this.canvasSizeInfo.width / 2,
+        y_coordinate: this.canvasSizeInfo.height / 2,
+        textBaseLine: "bottom",
+        textAlign: "end",
+      }
+    );
+  }
+
+  test2() {
+    const ctx = this.getRenderingContext("2d") as CanvasRenderingContext2D;
+    new Chart_Text_2D(
+      ctx,
+      {
+        font_weight: "bold",
+        fillText_color: "#D9ACF5",
+        strokeText_color: "#AAE3E2",
+        font_family: "Arial",
+        font_size: 20,
+        message: "Hello, world! 你好，世界！",
+      },
+      {
+        x_coordinate: this.canvasSizeInfo.width / 4,
+        y_coordinate: this.canvasSizeInfo.height / 4,
+        textBaseLine: "middle",
+        textAlign: "center",
+      }
     );
   }
 }
