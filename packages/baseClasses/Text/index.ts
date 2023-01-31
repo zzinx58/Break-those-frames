@@ -1,7 +1,7 @@
 export { Chart_Text_2D };
 type FontBasicConfigOptions = {
   font_size: number;
-  font_weight: string;
+  font_weight?: string;
   font_family: string;
   message: string;
 };
@@ -119,7 +119,9 @@ class Chart_Text_2D {
     //Canvas's font attr must contain 'size' & 'family'.
     //And the 'style', 'variant', 'weight' must be in the front of the 'size'.
     //The 'family' must be specified at the end position.
-    ctx.font = `${fontConfigOptions.font_weight} ${fontConfigOptions.font_size}px ${fontConfigOptions.font_family}`;
+    ctx.font = `${fontConfigOptions.font_weight ?? ""} ${
+      fontConfigOptions.font_size
+    }px ${fontConfigOptions.font_family}`;
     ctx.translate(positionOptions.x_coordinate, positionOptions.y_coordinate);
     ctx.textAlign = positionOptions.textAlign ?? "start";
     ctx.textBaseline = positionOptions.textBaseLine ?? "alphabetic";
@@ -140,7 +142,9 @@ class Chart_Text_2D {
       this.getFontOptions("FillText");
     ctx.save();
     ctx.fillStyle = fontConfigOptions.fillText_color ?? "#fff";
-    ctx.font = `${fontConfigOptions.font_weight} ${fontConfigOptions.font_size}px ${fontConfigOptions.font_family}`;
+    ctx.font = `${fontConfigOptions.font_weight ?? ""} ${
+      fontConfigOptions.font_size
+    }px ${fontConfigOptions.font_family}`;
     ctx.translate(positionOptions.x_coordinate, positionOptions.y_coordinate);
     ctx.textAlign = positionOptions.textAlign ?? "start";
     ctx.textBaseline = positionOptions.textBaseLine ?? "alphabetic";
