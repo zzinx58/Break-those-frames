@@ -43,48 +43,12 @@ class Chart_Text_2D {
     this.canvasRendingContext2D = canvasRendingContext2D;
     this.position_drawItemOptions = position_drawItemOptions;
     // this.test();
-    console.log(this.position_drawItemOptions);
-
     this.main_drawText();
   }
 
   private main_drawText() {
     this.drawFillText();
     this.drawStrokeText();
-  }
-
-  private test() {
-    this.position_drawItemOptions = { x_coordinate: 0, y_coordinate: 100 };
-    this.drawStrokeText();
-    this.position_drawItemOptions = { x_coordinate: 0, y_coordinate: 200 };
-    this.drawFillText();
-    this.position_drawItemOptions = { x_coordinate: 0, y_coordinate: 300 };
-    this.drawStrokeText();
-    this.drawFillText();
-    this.position_drawItemOptions = {
-      x_coordinate: 10,
-      y_coordinate: 300,
-      textBaseLine: "top",
-    };
-    this.drawStrokeText();
-    this.drawFillText();
-    this.position_drawItemOptions = {
-      x_coordinate: 500,
-      y_coordinate: 400,
-      rotate_radians: (Math.PI * 90) / 180,
-      textAlign: "center",
-    };
-    this.drawStrokeText();
-    this.drawFillText();
-    for (let i = 1; i < 5; i++) {
-      this.position_drawItemOptions = {
-        x_coordinate: 0,
-        y_coordinate: 500,
-        rotate_radians: (15 * i * Math.PI) / 180,
-      };
-      this.drawStrokeText();
-      this.drawFillText();
-    }
   }
 
   private getFontOptions(fontType: "FillText"): {
@@ -124,19 +88,20 @@ class Chart_Text_2D {
     ctx.font = `${fontConfigOptions.font_weight ?? ""} ${
       fontConfigOptions.font_size
     }px ${fontConfigOptions.font_family}`;
-    ctx.translate(positionOptions.x_coordinate, positionOptions.y_coordinate);
     ctx.textAlign = positionOptions.textAlign ?? "start";
     ctx.textBaseline = positionOptions.textBaseLine ?? "alphabetic";
-    positionOptions.rotate_radians &&
-      (positionOptions.rotate_radians > 0
-        ? ctx.rotate(positionOptions.rotate_radians)
-        : ctx.rotate(360 + positionOptions.rotate_radians));
-    ctx.strokeText(
-      `${positionOptions.x_coordinate}, ${positionOptions.y_coordinate}`,
-      // fontConfigOptions.message,
-      positionOptions.x_coordinate,
-      positionOptions.y_coordinate
-    );
+    if (positionOptions.rotate_radians) {
+      ctx.translate(positionOptions.x_coordinate, positionOptions.y_coordinate);
+      ctx.rotate(positionOptions.rotate_radians);
+      ctx.strokeText(fontConfigOptions.message, 0, 0);
+    } else {
+      ctx.strokeText(
+        // `(${positionOptions.x_coordinate}, ${positionOptions.y_coordinate})`,
+        fontConfigOptions.message,
+        positionOptions.x_coordinate,
+        positionOptions.y_coordinate
+      );
+    }
     ctx.restore();
   }
 
@@ -148,19 +113,54 @@ class Chart_Text_2D {
     ctx.font = `${fontConfigOptions.font_weight ?? ""} ${
       fontConfigOptions.font_size
     }px ${fontConfigOptions.font_family}`;
-    ctx.translate(positionOptions.x_coordinate, positionOptions.y_coordinate);
     ctx.textAlign = positionOptions.textAlign ?? "start";
     ctx.textBaseline = positionOptions.textBaseLine ?? "alphabetic";
-    positionOptions.rotate_radians &&
-      (positionOptions.rotate_radians > 0
-        ? ctx.rotate(positionOptions.rotate_radians)
-        : ctx.rotate(360 + positionOptions.rotate_radians));
-    ctx.fillText(
-      `${positionOptions.x_coordinate}, ${positionOptions.y_coordinate}`,
-      // fontConfigOptions.message,
-      positionOptions.x_coordinate,
-      positionOptions.y_coordinate
-    );
+    if (positionOptions.rotate_radians) {
+      ctx.translate(positionOptions.x_coordinate, positionOptions.y_coordinate);
+      ctx.rotate(positionOptions.rotate_radians);
+      ctx.fillText(fontConfigOptions.message, 0, 0);
+    } else {
+      ctx.fillText(
+        // `(${positionOptions.x_coordinate}, ${positionOptions.y_coordinate})`,
+        fontConfigOptions.message,
+        positionOptions.x_coordinate,
+        positionOptions.y_coordinate
+      );
+    }
     ctx.restore();
+  }
+
+  private test() {
+    this.position_drawItemOptions = { x_coordinate: 0, y_coordinate: 100 };
+    this.drawStrokeText();
+    this.position_drawItemOptions = { x_coordinate: 0, y_coordinate: 200 };
+    this.drawFillText();
+    this.position_drawItemOptions = { x_coordinate: 0, y_coordinate: 300 };
+    this.drawStrokeText();
+    this.drawFillText();
+    this.position_drawItemOptions = {
+      x_coordinate: 10,
+      y_coordinate: 300,
+      textBaseLine: "top",
+    };
+    this.drawStrokeText();
+    this.drawFillText();
+    this.position_drawItemOptions = {
+      x_coordinate: 500,
+      y_coordinate: 400,
+      rotate_radians: (Math.PI * 90) / 180,
+      textAlign: "center",
+    };
+    this.drawStrokeText();
+    this.drawFillText();
+    for (let i = 1; i < 5; i++) {
+      this.position_drawItemOptions = {
+        x_coordinate: 0,
+        y_coordinate: 500,
+        rotate_radians: (15 * i * Math.PI) / 180,
+      };
+      this.drawStrokeText();
+      this.drawFillText();
+    }
   }
 }

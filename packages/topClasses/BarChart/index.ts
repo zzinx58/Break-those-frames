@@ -16,9 +16,6 @@ class BarChart extends CanvasContainer {
 
     this.test1();
     this.test2();
-
-    console.log(this.canvasSizeInfo);
-    console.log(this.containerInfo_RelateToViewport);
   }
 
   private getRenderingContext(renderingContextId: string) {
@@ -30,15 +27,6 @@ class BarChart extends CanvasContainer {
 
   private test1() {
     const ctx = this.getRenderingContext("2d") as CanvasRenderingContext2D;
-    // ctx.save();
-    // ctx.strokeStyle = "fff";
-    // ctx.beginPath();
-    // ctx.moveTo(0, 0);
-    // ctx.lineTo(100, 100);
-    // ctx.stroke();
-    // ctx.restore();
-    // console.log(this.containerInfo_RelateToViewport.height);
-
     //left_upper
     new Chart_Text_2D(
       ctx,
@@ -69,7 +57,7 @@ class BarChart extends CanvasContainer {
         message: "Hello, world! 你好，世界！",
       },
       {
-        x_coordinate: this.canvasSizeInfo.width / 2,
+        x_coordinate: this.canvasSizeInfo.width,
         y_coordinate: 0,
         textBaseLine: "top",
         textAlign: "end",
@@ -88,7 +76,7 @@ class BarChart extends CanvasContainer {
       },
       {
         x_coordinate: 0,
-        y_coordinate: this.canvasSizeInfo.height / 2,
+        y_coordinate: this.canvasSizeInfo.height,
         textBaseLine: "bottom",
         textAlign: "start",
       }
@@ -105,8 +93,8 @@ class BarChart extends CanvasContainer {
         message: "Hello, world! 你好，世界！",
       },
       {
-        x_coordinate: this.canvasSizeInfo.width / 2,
-        y_coordinate: this.canvasSizeInfo.height / 2,
+        x_coordinate: this.canvasSizeInfo.width,
+        y_coordinate: this.canvasSizeInfo.height,
         textBaseLine: "bottom",
         textAlign: "end",
       }
@@ -122,14 +110,51 @@ class BarChart extends CanvasContainer {
         fillText_color: "#D9ACF5",
         strokeText_color: "#AAE3E2",
         font_family: "Arial",
-        font_size: 20,
+        font_size: 30,
         message: "Hello, world! 你好，世界！",
       },
       {
-        x_coordinate: this.canvasSizeInfo.width / 4,
-        y_coordinate: this.canvasSizeInfo.height / 4,
+        x_coordinate: this.canvasSizeInfo.width / 2,
+        y_coordinate: this.canvasSizeInfo.height / 2,
         textBaseLine: "middle",
         textAlign: "center",
+        rotate_radians: (Math.PI * 90) / 180,
+      }
+    );
+    new Chart_Text_2D(
+      ctx,
+      {
+        font_weight: "bold",
+        fillText_color: "#D9ACF5",
+        strokeText_color: "#AAE3E2",
+        font_family: "Arial",
+        font_size: 30,
+        message: "Hello, world! 你好，世界！",
+      },
+      {
+        x_coordinate: this.canvasSizeInfo.width,
+        y_coordinate: this.canvasSizeInfo.height / 2,
+        textBaseLine: "top",
+        textAlign: "center",
+        rotate_radians: (Math.PI * 90) / 180,
+      }
+    );
+    new Chart_Text_2D(
+      ctx,
+      {
+        font_weight: "bold",
+        fillText_color: "#D9ACF5",
+        strokeText_color: "#AAE3E2",
+        font_family: "Arial",
+        font_size: 30,
+        message: "Hello, world! 你好，世界！",
+      },
+      {
+        x_coordinate: 0,
+        y_coordinate: this.canvasSizeInfo.height / 2,
+        textBaseLine: "top",
+        textAlign: "center",
+        rotate_radians: -Math.PI / 2,
       }
     );
   }
