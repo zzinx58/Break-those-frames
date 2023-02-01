@@ -1,22 +1,23 @@
 export { Chart_Text_2D };
-export type { FontConfigOptions, Position_DrawItemOptions };
+export type { FontConfigOptions, Position_DrawTextOptions };
 type FontBasicConfigOptions = {
   font_size?: number;
   font_weight?: string;
   font_family?: string;
-  message: string;
 };
 type FillTextConfigOption = {
+  //For RendingEngine use.
   fillText_color?: string;
 } & FontBasicConfigOptions;
 type StrokeTextConfigOption = {
+  //For RendingEngine use.
   strokeText_color?: string;
 } & FontBasicConfigOptions;
 interface BasicFontOptionReturnType {
   ctx: CanvasRenderingContext2D;
-  positionOptions: Position_DrawItemOptions;
+  positionOptions: Position_DrawTextOptions;
 }
-type Position_DrawItemOptions = {
+type Position_DrawTextOptions = {
   x_coordinate: number;
   y_coordinate: number;
   rotate_radians?: number;
@@ -32,17 +33,24 @@ type Position_DrawItemOptions = {
 type FontConfigOptions = FillTextConfigOption & StrokeTextConfigOption;
 
 class Chart_Text_2D {
-  private fontConfigOptions: FontConfigOptions;
   private canvasRendingContext2D: CanvasRenderingContext2D;
-  private position_drawItemOptions: Position_DrawItemOptions;
+  private message: string;
+  private fontConfigOptions: FontConfigOptions;
+  //Provide position config ability to LayoutEngine.
+  public position_drawItemOptions: Position_DrawTextOptions;
   constructor(
     canvasRendingContext2D: CanvasRenderingContext2D,
+    message: string,
     fontConfigOptions: FontConfigOptions,
-    position_drawItemOptions: Position_DrawItemOptions
+    position_drawItemOptions?: Position_DrawTextOptions
   ) {
-    this.fontConfigOptions = fontConfigOptions;
     this.canvasRendingContext2D = canvasRendingContext2D;
-    this.position_drawItemOptions = position_drawItemOptions;
+    this.message = message;
+    this.fontConfigOptions = fontConfigOptions;
+    this.position_drawItemOptions = position_drawItemOptions ?? {
+      x_coordinate: 0,
+      y_coordinate: 0,
+    };
     // this.test();
     this.main_drawText();
   }
@@ -52,12 +60,12 @@ class Chart_Text_2D {
     this.drawStrokeText();
   }
 
-  private getFontOptions(fontType: "FillText"): {
+  private getFontOptions(fontType: "FillText"): BasicFontOptionReturnType & {
     fontConfigOptions: FillTextConfigOption;
-  } & BasicFontOptionReturnType;
-  private getFontOptions(fontType: "StrokeText"): {
+  };
+  private getFontOptions(fontType: "StrokeText"): BasicFontOptionReturnType & {
     fontConfigOptions: StrokeTextConfigOption;
-  } & BasicFontOptionReturnType;
+  };
   private getFontOptions(fontType: any): any {
     return {
       ctx: this.canvasRendingContext2D,
@@ -66,8 +74,10 @@ class Chart_Text_2D {
     };
   }
 
-  private getFontSize(str: string) {
-    let fontMetrics = this.canvasRendingContext2D.measureText(str);
+  //Provide Text size info to LayoutEngine for calc use.
+  //It's size contains it's weight? This might be a bug.
+  public getFontSize() {
+    let fontMetrics = this.canvasRendingContext2D.measureText(this.message);
     return {
       actualFontHeight:
         fontMetrics.actualBoundingBoxAscent +
@@ -94,11 +104,11 @@ class Chart_Text_2D {
     if (positionOptions.rotate_radians) {
       ctx.translate(positionOptions.x_coordinate, positionOptions.y_coordinate);
       ctx.rotate(positionOptions.rotate_radians);
-      ctx.strokeText(fontConfigOptions.message, 0, 0);
+      ctx.strokeText(this.message, 0, 0);
     } else {
       ctx.strokeText(
         // `(${positionOptions.x_coordinate}, ${positionOptions.y_coordinate})`,
-        fontConfigOptions.message,
+        this.message,
         positionOptions.x_coordinate,
         positionOptions.y_coordinate
       );
@@ -119,49 +129,15 @@ class Chart_Text_2D {
     if (positionOptions.rotate_radians) {
       ctx.translate(positionOptions.x_coordinate, positionOptions.y_coordinate);
       ctx.rotate(positionOptions.rotate_radians);
-      ctx.fillText(fontConfigOptions.message, 0, 0);
+      ctx.fillText(this.message, 0, 0);
     } else {
       ctx.fillText(
         // `(${positionOptions.x_coordinate}, ${positionOptions.y_coordinate})`,
-        fontConfigOptions.message,
+        this.message,
         positionOptions.x_coordinate,
         positionOptions.y_coordinate
       );
     }
     ctx.restore();
-  }
-
-  private test() {
-    this.position_drawItemOptions = { x_coordinate: 0, y_coordinate: 100 };
-    this.drawStrokeText();
-    this.position_drawItemOptions = { x_coordinate: 0, y_coordinate: 200 };
-    this.drawFillText();
-    this.position_drawItemOptions = { x_coordinate: 0, y_coordinate: 300 };
-    this.drawStrokeText();
-    this.drawFillText();
-    this.position_drawItemOptions = {
-      x_coordinate: 10,
-      y_coordinate: 300,
-      textBaseLine: "top",
-    };
-    this.drawStrokeText();
-    this.drawFillText();
-    this.position_drawItemOptions = {
-      x_coordinate: 500,
-      y_coordinate: 400,
-      rotate_radians: (Math.PI * 90) / 180,
-      textAlign: "center",
-    };
-    this.drawStrokeText();
-    this.drawFillText();
-    for (let i = 1; i < 5; i++) {
-      this.position_drawItemOptions = {
-        x_coordinate: 0,
-        y_coordinate: 500,
-        rotate_radians: (15 * i * Math.PI) / 180,
-      };
-      this.drawStrokeText();
-      this.drawFillText();
-    }
   }
 }
