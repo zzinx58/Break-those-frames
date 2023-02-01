@@ -10,6 +10,7 @@
 import {PieChart} from './classes/pieChart'
 import {ChartData} from './classes/chartData'
 import { getTransitionRawChildren, onMounted } from 'vue';
+import { MapChart } from './classes/mapChart';
 
 const data = [
   new ChartData('a',0.1),
@@ -20,7 +21,7 @@ const data = [
 
 
 function start(){
-  let mycanvas = new PieChart('a',400,300,data);
+  let mycanvas = new MapChart('a',400,300,'https://geo.datav.aliyun.com/areas_v3/bound/441300_full.json');
   mycanvas.render();
 }
 onMounted(start);
