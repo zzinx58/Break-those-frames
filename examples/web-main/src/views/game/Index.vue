@@ -10,27 +10,29 @@
 
     <!-- 游戏区 -->
     <div class="game-play">
-      <!-- 反面卡片 -->
-      <div ref="reverseCard" class="random-event card reverse-card">
-        <div class="random-event-result">结果：{{ curEvent.eventResult }}</div>
-        <button @click="continueGame">继续</button>
-      </div>
-
-      <!-- 正面卡片 -->
-      <div ref="frontCard" class="random-event card">
-        <div class="random-event-content">
-          事件：{{ curEvent.eventContent }}
+      <div class="card-wrap">
+        <!-- 反面卡片 -->
+        <div ref="reverseCard" class="cur-event card reverse-card">
+          <div class="cur-event-result">结果：{{ curEvent.eventResult }}</div>
+          <button @click="continueGame">继续</button>
         </div>
 
-        <button @click="firstChoice" class="choice-content">
-          选项一：{{ curEvent.firstChoiceContent }}
-        </button>
+        <!-- 正面卡片 -->
+        <div ref="frontCard" class="cur-event card">
+          <div class="cur-event-content">事件：{{ curEvent.eventContent }}</div>
 
-        <button @click="secondChoice" class="choice-content">
-          选项二：{{ curEvent.secondChoiceContent }}
-        </button>
+          <button @click="firstChoice" class="cur-event-choice-content">
+            选项一：{{ curEvent.firstChoiceContent }}
+          </button>
+
+          <button @click="secondChoice" class="cur-event-choice-content">
+            选项二：{{ curEvent.secondChoiceContent }}
+          </button>
+        </div>
       </div>
     </div>
+
+    <!-- 返回开始界面按钮 -->
     <button @click="backStart">返回开始界面</button>
 
     <!-- 事件区 -->
@@ -42,7 +44,7 @@
 </template>
 
 <script lang="ts">
-import { ref, reactive, onMounted } from "vue";
+import { ref, reactive } from "vue";
 import { useRouter } from "vue-router";
 
 export default {
@@ -95,16 +97,33 @@ export default {
       attribute.money = 20;
       attribute.grades = 20;
       attribute.love = 20;
-      updateCurEvent();
+      updateFrontCurEvent();
     }
 
-    // 更新当前事件内容
-    function updateCurEvent() {
+    // 更新当前事件正面内容
+    function updateFrontCurEvent() {
       curEvent.eventContent = randomEvent.eventContent;
       curEvent.firstChoiceContent = randomEvent.firstChoiceContent;
       curEvent.secondChoiceContent = randomEvent.secondChoiceContent;
     }
 
+    // 更新当前事件反面内容
+    function updateReverseCurEvent(choiceNum: number) {
+      const firstChoice = 1,
+        secondChoice = 2;
+      if (choiceNum === firstChoice) {
+        curEvent.eventResult = randomEvent.firstChoiceResult;
+      } else if (choiceNum === secondChoice) {
+        curEvent.eventResult = randomEvent.secondChoiceResult;
+      }
+    }
+
+    // 更新随机事件内容
+    function updateRandomEvent() {
+      randomEvent = getRandomEvent(attribute.week);
+    }
+
+    // 正反卡片dom
     let frontCard = ref();
     let reverseCard = ref();
 
@@ -122,24 +141,22 @@ export default {
 
     // 选项一
     function firstChoice() {
-      console.log("firstChoice");
-      curEvent.eventResult = randomEvent.firstChoiceResult;
-      console.log(curEvent.eventResult);
+      const choiceNum = 1;
+      updateReverseCurEvent(choiceNum);
       flipFrontCard();
     }
 
     // 选项二
     function secondChoice() {
-      console.log("secondChoice");
-      curEvent.eventResult = randomEvent.secondChoiceResult;
-      console.log(curEvent.eventResult);
+      const choiceNum = 2;
+      updateReverseCurEvent(choiceNum);
       flipFrontCard();
     }
 
     // 继续游戏
     function continueGame() {
-      randomEvent = getRandomEvent(attribute.week);
-      updateCurEvent();
+      updateRandomEvent();
+      updateFrontCurEvent();
       flipReverseCard();
     }
 
@@ -215,6 +232,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-column-center {
+  @include flex-center;
+  flex-flow: column;
+}
+
 .game {
   display: flex;
   flex-flow: column;
@@ -224,58 +252,40 @@ export default {
     display: flex;
     .time {
       flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      @include flex-center;
       border: 1px solid #ccc;
     }
     .game-attribute {
       flex: 2;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      @include flex-center;
       border: 1px solid #ccc;
     }
   }
   .game-play {
     flex: 5;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @include flex-center;
     border: 1px solid #ccc;
     height: 100%;
-    .random-event {
-      display: flex;
-      flex-flow: column;
-      align-items: center;
-      justify-content: center;
+    .cur-event {
+      @include flex-column-center;
       border: 1px solid #ccc;
       border-radius: 10px;
       width: 600px;
       height: 300px;
       background-color: #eee;
-      .random-event-content {
+      .cur-event-content {
         flex: 1;
-        display: flex;
-        flex-flow: column;
-        align-items: center;
-        justify-content: center;
+        @include flex-column-center;
         margin: 5% 5%;
       }
-      .choice-content {
+      .cur-event-choice-content {
         flex: 1;
-        display: flex;
-        flex-flow: column;
-        align-items: center;
-        justify-content: center;
+        @include flex-column-center;
         margin: 0 5% 5%;
         width: 80%;
       }
-      .random-event-result {
-        display: flex;
-        flex-flow: column;
-        align-items: center;
-        justify-content: center;
+      .cur-event-result {
+        @include flex-column-center;
       }
     }
   }
@@ -284,23 +294,23 @@ export default {
     display: flex;
     .game-event {
       flex: 1;
-      display: flex;
-      flex-flow: column;
-      align-items: center;
-      justify-content: center;
+      @include flex-column-center;
       border: 1px solid #ccc;
     }
   }
 }
 
 // 卡片翻转效果
-.card {
-  position: absolute;
-  backface-visibility: hidden;
-  transition: all 1s;
-}
-
-.reverse-card {
-  transform: rotateY(-180deg);
+.card-wrap {
+  width: 600px;
+  height: 300px;
+  .card {
+    position: absolute;
+    backface-visibility: hidden;
+    transition: all 1s;
+  }
+  .reverse-card {
+    transform: rotateY(-180deg);
+  }
 }
 </style>
