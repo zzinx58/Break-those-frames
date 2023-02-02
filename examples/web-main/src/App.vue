@@ -22,7 +22,6 @@ const data = [
 
 function start(){
   let mycanvas = new MapChart('a',400,300,'https://geo.datav.aliyun.com/areas_v3/bound/441300_full.json');
-  mycanvas.render();
 }
 onMounted(start);
 </script>
