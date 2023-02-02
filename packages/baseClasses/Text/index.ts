@@ -20,6 +20,7 @@ interface BasicFontOptionReturnType {
 type Position_DrawTextOptions = {
   x_coordinate: number;
   y_coordinate: number;
+  //For RendingEngine use.
   rotate_radians?: number;
   textAlign?: "left" | "right" | "center" | "start" | "end";
   textBaseLine?:
