@@ -97,8 +97,10 @@ class BarChartLayoutEngine2D extends CanvasContainer {
     protected canvasSizeInfo: { height: number; width: number };
    */
 
+  //Fot test use.
+  public renderingContext: RenderingContext | null;
   //LayoutEngine's variables
-  protected renderingContext: RenderingContext | null;
+  // protected renderingContext: RenderingContext | null;
   protected barChartConfigOption: BasicBarChartConfigOption;
   // protected barChartSpaceRectObj: typeof this.createCanvasItemRect;
   // protected solvedSpaceConfigObj:
@@ -139,11 +141,26 @@ class BarChartLayoutEngine2D extends CanvasContainer {
     }, Object.create(null));
   }
 
-  private solveConfig() {
+  public getConstNameArr() {
+    const _a =
+      this._AggregateOfLayoutEngineNeededObj()
+        .mayNeededPointsNameArr_default_public;
+    const _b =
+      this._AggregateOfLayoutEngineNeededObj()
+        .mayNeededSpaceRectNameArr_default_public;
+    return {
+      spaceObjNameArr: _b,
+      pointObjNameArr: _a,
+    };
+  }
+  public solveConfig() {
+    // private solveConfig() {
     //Could be impr using pipe.
     const solvedFontConfigObj = this.solveConfigOfFonts();
     const solvedSpaceConfigObj =
       this.solveConfigOfSpaceRectItems(solvedFontConfigObj);
+    console.log(solvedSpaceConfigObj);
+    return solvedSpaceConfigObj;
     //
     // Object.keys(solvedFontConfigObj).forEach((key) => {
     //   Object.assign(solvedFontConfigObj[key], solvedFontConfigObj[key]);
@@ -188,7 +205,8 @@ class BarChartLayoutEngine2D extends CanvasContainer {
     return result;
   }
 
-  private solveConfigOfSpaceRectItems(
+  // private solveConfigOfSpaceRectItems(
+  public solveConfigOfSpaceRectItems(
     solvedFontConfigObj: FontConfigSolvedBarChartConfigOption
   ) {
     const { subTitle_configOptions: user_subTitle_configOptions } =
@@ -384,6 +402,9 @@ class BarChartLayoutEngine2D extends CanvasContainer {
       mayNeededSpaceRectItemsObj_default,
       mayNeededCanvasPointsObj_default,
       default_ChartPadding,
+      mayNeededSpaceRectNameArr_default_public:
+        mayNeededSpaceRectNameArr_default,
+      mayNeededPointsNameArr_default_public: mayNeededPointsNameArr_default,
     };
   }
 }

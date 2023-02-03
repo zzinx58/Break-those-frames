@@ -5,8 +5,7 @@ class CanvasContainer {
   //CanvasContainer's Info realte to the viewport
   protected containerInfo_RelateToViewport: DOMRect;
   //CanvasContainer's Content：CanvasElement
-  //public for test use.
-  public canvasElement: HTMLCanvasElement;
+  protected canvasElement: HTMLCanvasElement;
   // protected canvasElement: HTMLCanvasElement;
   protected canvasSizeInfo: { height: number; width: number };
 

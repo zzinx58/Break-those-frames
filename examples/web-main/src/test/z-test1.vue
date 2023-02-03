@@ -28,46 +28,6 @@ const data = {
 };
 onMounted(() => {
   const containerDOM = document.getElementById("container-test");
-  // Rect Class Test.
-  const canvasContainer = containerDOM && new CanvasContainer(containerDOM);
-  const ctx = canvasContainer && canvasContainer.canvasElement.getContext("2d");
-  const rectItem =
-    ctx &&
-    new Chart_Rect_2D(ctx, {
-      fillRect_color: bar_colors[0],
-      strokeRect_color: bar_colors[1],
-      strokeRect_lineWidth: 15,
-      rectangleBounds: {
-        x_coordinate: 0,
-        y_coordinate: 0,
-        width: 200,
-        height: 200,
-      },
-    });
-  const textFontConfig: FontConfigOptions = {
-    fillText_color: "#fff",
-    font_size: 20,
-  };
-  const { x_coordinate, y_coordinate } = rectItem!.centerPoint;
-  const textPositionConfig: Position_DrawTextOptions = {
-    x_coordinate: x_coordinate,
-    y_coordinate: y_coordinate,
-    textAlign: "center",
-    textBaseLine: "middle",
-  };
-  const textItem =
-    ctx && new Chart_Text_2D(ctx, "200", textFontConfig, textPositionConfig);
-
-  // const barChartConfigOptions: BasicBarChartConfigOption = {
-  //   data: data,
-  //   barChartType: "horizontal_L2R",
-  //   title_configOptions: {
-  //     message: "TestForBarChart",
-  //     fontConfigOptions: {},
-  //   },
-  // };
-  // const barChartTest =
-  //   containerDOM && new BarChart2D(containerDOM, barChartConfigOptions);
 });
 </script>
 
