@@ -1,9 +1,3 @@
-export { BarChartLayoutEngine2D };
-export type {
-  BasicBarChartConfigOption,
-  CanvasPointPositionType,
-  CanvasItemRect,
-};
 import {
   Chart_Text_2D,
   FontConfigOptions,
@@ -12,16 +6,7 @@ import {
 import { CanvasContainer } from "../../topClasses/Container";
 type basicBarChartType = "vertical_B2T" | "horizontal_L2R";
 type BarChartType = basicBarChartType | "horizontal_two-way_T2B";
-type CanvasItemRect = {
-  x_coordinate: number;
-  y_coordinate: number;
-  width: number;
-  height: number;
-};
-type CanvasPointPositionType = {
-  x_coordinate: number;
-  y_coordinate: number;
-};
+
 type SpaceNameType =
   | "titleSpaceRect"
   | "SubtitleSpaceRect"

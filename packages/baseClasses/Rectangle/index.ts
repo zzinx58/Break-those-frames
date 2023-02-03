@@ -1,6 +1,7 @@
 import { CanvasItemRect, CanvasPointPositionType } from "..";
 
 export { Chart_Rect_2D };
+export type { ChartUseRectItemConfig };
 type RectangleBounds = { rectangleBounds: CanvasItemRect };
 type RectStyleConfig = {
   fillRect_color?: string;
@@ -8,6 +9,15 @@ type RectStyleConfig = {
   strokeRect_lineWidth?: number;
 };
 type RectConfigUnionType = RectStyleConfig & RectangleBounds;
+type ChartUseRectItemConfig =
+  | ({ fillRect_color: string } & RectStyleConfig)
+  | ({
+      strokeRect_color: string;
+    } & RectStyleConfig)
+  | ({
+      fillRect_color: string;
+      strokeRect_color: string;
+    } & RectStyleConfig);
 type UserRectItemConfig =
   | ({ fillRect_color: string } & RectConfigUnionType)
   | ({

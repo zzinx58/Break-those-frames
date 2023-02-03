@@ -12,6 +12,7 @@ type FillTextConfigOption = {
 type StrokeTextConfigOption = {
   //For RendingEngine use.
   strokeText_color?: string;
+  strokeText_lineWidth?: number;
 } & FontBasicConfigOptions;
 interface BasicFontOptionReturnType {
   ctx: CanvasRenderingContext2D;
@@ -36,13 +37,14 @@ type FontConfigOptions = FillTextConfigOption & StrokeTextConfigOption;
 class Chart_Text_2D {
   private canvasRendingContext2D: CanvasRenderingContext2D;
   private message: string;
-  private fontConfigOptions: FontConfigOptions;
+  //We will automatically set default value for the fontStyle, so fontConfigOptions could be undefined.
+  private fontConfigOptions: FontConfigOptions | undefined;
   //Provide position config ability to LayoutEngine.
   public position_drawItemOptions: Position_DrawTextOptions;
   constructor(
     canvasRendingContext2D: CanvasRenderingContext2D,
     message: string,
-    fontConfigOptions: FontConfigOptions,
+    fontConfigOptions?: FontConfigOptions,
     position_drawItemOptions?: Position_DrawTextOptions
   ) {
     this.canvasRendingContext2D = canvasRendingContext2D;
@@ -57,8 +59,8 @@ class Chart_Text_2D {
   }
 
   private main_drawText() {
-    this.drawFillText();
-    this.drawStrokeText();
+    this.fontConfigOptions?.fillText_color && this.drawFillText();
+    this.fontConfigOptions?.strokeText_color && this.drawStrokeText();
   }
 
   private getFontOptions(fontType: "FillText"): BasicFontOptionReturnType & {
@@ -93,6 +95,7 @@ class Chart_Text_2D {
     const { ctx, fontConfigOptions, positionOptions } =
       this.getFontOptions("StrokeText");
     ctx.save();
+    ctx.lineWidth = fontConfigOptions.strokeText_lineWidth ?? 1;
     ctx.strokeStyle = fontConfigOptions.strokeText_color ?? "#fff";
     //Canvas's font attr must contain 'size' & 'family'.
     //And the 'style', 'variant', 'weight' must be in the front of the 'size'.
