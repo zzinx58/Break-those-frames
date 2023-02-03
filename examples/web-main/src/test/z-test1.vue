@@ -32,6 +32,7 @@ onMounted(() => {
     new Chart_Rect_2D(ctx, {
       fillRect_color: bar_colors[0],
       strokeRect_color: "red",
+      strokeRect_lineWidth: 1,
       rectangleBounds: {
         x_coordinate: 0,
         y_coordinate: 0,

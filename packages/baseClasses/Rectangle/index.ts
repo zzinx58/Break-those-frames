@@ -2,20 +2,24 @@ import { CanvasItemRect, CanvasPointPositionType } from "..";
 
 export { Chart_Rect_2D };
 type RectangleBounds = { rectangleBounds: CanvasItemRect };
-type RectColorConfig = {
+type RectStyleConfig = {
   fillRect_color?: string;
   strokeRect_color?: string;
+  strokeRect_lineWidth?: number;
 };
-type RectConfigUnionType = RectColorConfig & RectangleBounds;
+type RectConfigUnionType = RectStyleConfig & RectangleBounds;
 type UserRectItemConfig =
   | ({ fillRect_color: string } & RectConfigUnionType)
-  | ({ strokeRect_color: string } & RectConfigUnionType)
+  | ({
+      strokeRect_color: string;
+    } & RectConfigUnionType)
   | ({
       fillRect_color: string;
       strokeRect_color: string;
     } & RectConfigUnionType);
 class Chart_Rect_2D {
   private renderingContext: CanvasRenderingContext2D;
+  //For RendingEngine use.
   public centerPoint: CanvasPointPositionType;
   constructor(
     canvasRendingContext2D: CanvasRenderingContext2D,
@@ -31,14 +35,16 @@ class Chart_Rect_2D {
     ctx.save();
     const { x_coordinate, y_coordinate, height, width } =
       userRectItemConfig.rectangleBounds;
-    const { fillRect_color, strokeRect_color } = userRectItemConfig;
+    const { fillRect_color, strokeRect_color, strokeRect_lineWidth } =
+      userRectItemConfig;
     if (fillRect_color) {
       ctx.fillStyle = fillRect_color;
       ctx.fillRect(x_coordinate, y_coordinate, width, height);
     }
     if (strokeRect_color) {
-      (ctx.strokeStyle = strokeRect_color),
-        ctx.strokeRect(x_coordinate, y_coordinate, width, height);
+      ctx.lineWidth = strokeRect_lineWidth ?? 1;
+      ctx.strokeStyle = strokeRect_color;
+      ctx.strokeRect(x_coordinate, y_coordinate, width, height);
     }
     ctx.restore();
   }
