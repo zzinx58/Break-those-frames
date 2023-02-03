@@ -1,5 +1,9 @@
 export { BarChartLayoutEngine2D };
-export type { BasicBarChartConfigOption };
+export type {
+  BasicBarChartConfigOption,
+  CanvasPointPositionType,
+  CanvasItemRect,
+};
 import {
   Chart_Text_2D,
   FontConfigOptions,
@@ -82,7 +86,6 @@ type TypeTool_GetReturnType<Func extends Function> = Func extends (
 ) => infer ReturnType
   ? ReturnType
   : never;
-
 //BarChartLayoutEngine have to return the spaceItemRect infos.
 class BarChartLayoutEngine2D extends CanvasContainer {
   /*
@@ -98,6 +101,7 @@ class BarChartLayoutEngine2D extends CanvasContainer {
   protected renderingContext: RenderingContext | null;
   protected barChartConfigOption: BasicBarChartConfigOption;
   // protected barChartSpaceRectObj: typeof this.createCanvasItemRect;
+  // protected solvedSpaceConfigObj:
 
   constructor(
     containerDOM: HTMLElement,

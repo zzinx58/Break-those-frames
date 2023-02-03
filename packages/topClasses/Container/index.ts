@@ -3,9 +3,11 @@ class CanvasContainer {
   //CanvasContainer's actual bearing element
   private containerDOM: HTMLElement;
   //CanvasContainer's Info realte to the viewport
-  private containerInfo_RelateToViewport: DOMRect;
+  protected containerInfo_RelateToViewport: DOMRect;
   //CanvasContainer's Content：CanvasElement
-  protected canvasElement: HTMLCanvasElement;
+  //public for test use.
+  public canvasElement: HTMLCanvasElement;
+  // protected canvasElement: HTMLCanvasElement;
   protected canvasSizeInfo: { height: number; width: number };
 
   constructor(containerDOM: HTMLElement) {
