@@ -7,6 +7,9 @@ import { BarChart2D } from "bar_chart";
 import {
   BasicBarChartConfigOption,
   Chart_Rect_2D,
+  Chart_Text_2D,
+  FontConfigOptions,
+  Position_DrawTextOptions,
 } from "../../../../packages/baseClasses";
 //Only for test use. So import like this way, it will be fix afterwards.
 import { CanvasContainer } from "../../../../packages/topClasses/Container";
@@ -28,11 +31,12 @@ onMounted(() => {
   // Rect Class Test.
   const canvasContainer = containerDOM && new CanvasContainer(containerDOM);
   const ctx = canvasContainer && canvasContainer.canvasElement.getContext("2d");
-  ctx &&
+  const rectItem =
+    ctx &&
     new Chart_Rect_2D(ctx, {
       fillRect_color: bar_colors[0],
-      strokeRect_color: "red",
-      strokeRect_lineWidth: 1,
+      strokeRect_color: bar_colors[1],
+      strokeRect_lineWidth: 15,
       rectangleBounds: {
         x_coordinate: 0,
         y_coordinate: 0,
@@ -40,6 +44,20 @@ onMounted(() => {
         height: 200,
       },
     });
+  const textFontConfig: FontConfigOptions = {
+    fillText_color: "#fff",
+    font_size: 20,
+  };
+  const { x_coordinate, y_coordinate } = rectItem!.centerPoint;
+  const textPositionConfig: Position_DrawTextOptions = {
+    x_coordinate: x_coordinate,
+    y_coordinate: y_coordinate,
+    textAlign: "center",
+    textBaseLine: "middle",
+  };
+  const textItem =
+    ctx && new Chart_Text_2D(ctx, "200", textFontConfig, textPositionConfig);
+
   // const barChartConfigOptions: BasicBarChartConfigOption = {
   //   data: data,
   //   barChartType: "horizontal_L2R",
