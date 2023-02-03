@@ -5,14 +5,12 @@
 <script setup lang="ts">
 import { BarChart2D } from "bar_chart";
 import {
-  BasicBarChartConfigOption,
   Chart_Rect_2D,
   Chart_Text_2D,
   FontConfigOptions,
   Position_DrawTextOptions,
 } from "../../../../packages/baseClasses";
 //Only for test use. So import like this way, it will be fix afterwards.
-import { CanvasContainer } from "../../../../packages/topClasses/Container";
 const bar_colors = ["#AAE3E2", "#D9ACF5", "#FFCEFE", "#FDEBED"];
 const data = {
   朱宗旭: 20,

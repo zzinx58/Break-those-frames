@@ -8,7 +8,7 @@ import {
   Chart_Text_2D,
   FontConfigOptions,
   Position_DrawTextOptions,
-} from "../../baseClasses/index";
+} from "../index";
 import { CanvasContainer } from "../../topClasses/Container";
 type basicBarChartType = "vertical_B2T" | "horizontal_L2R";
 type BarChartType = basicBarChartType | "horizontal_two-way_T2B";
