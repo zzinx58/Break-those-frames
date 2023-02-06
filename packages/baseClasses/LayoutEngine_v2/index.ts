@@ -17,15 +17,22 @@ class LayoutEngine extends CanvasContainer {
   constructor(
     containerDOM: HTMLElement,
     contextType: ContextType,
-    gridConfig: GridConfigType,
-    maxValue: number
+    maxValue: number,
+    gridConfig?: GridConfigType
   ) {
     super(containerDOM);
     const ctx = this.canvasElement.getContext(
       contextType
     ) as CanvasRenderingContext2D;
     this.renderingContext = ctx;
-    this.initChartContentSpace(ctx, gridConfig, maxValue);
+    const finalGridConfig =
+      gridConfig ??
+      ({
+        topSpaceHeight: 0,
+        border_paddingWidth: 0,
+        bottomSpaceHeight: 0,
+      } as GridConfigType);
+    this.initChartContentSpace(ctx, finalGridConfig, maxValue);
   }
 
   private initChartContentSpace(

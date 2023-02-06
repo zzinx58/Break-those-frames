@@ -97,7 +97,7 @@ type Series_ChartConfig = {
 type GridConfigType = {
   topSpaceHeight: number;
   bottomSpaceHeight: number;
-  border_paddingWidth: number;
+  border_paddingWidth?: number;
 };
 
 // const test: Series_ChartConfig = {

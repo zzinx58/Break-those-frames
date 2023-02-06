@@ -6,6 +6,7 @@
 import { BarChart2D } from "bar_chart";
 //Only for test use. So import like this way, it will be fix afterwards.
 import {
+  Chart_Line_2D,
   Chart_Rect_2D,
   Chart_Text_2D,
   FontConfigOptions,
@@ -28,7 +29,21 @@ const data = {
 onMounted(() => {
   const containerDOM = document.getElementById("container-test");
   if (containerDOM) {
-    const ctx = new LayoutEngine(containerDOM, "2d").renderingContext;
+    const ctx = new LayoutEngine(containerDOM, "2d", 1000)
+      .renderingContext as CanvasRenderingContext2D;
+    const lineItem = new Chart_Line_2D(
+      ctx,
+      {
+        start_x_coordinate: 0,
+        start_y_coordinate: 0,
+        end_x_coordinate: 200,
+        end_y_coordinate: 200,
+      },
+      {
+        line_color: "red",
+        lineWidth: 2,
+      }
+    );
   }
 });
 </script>
