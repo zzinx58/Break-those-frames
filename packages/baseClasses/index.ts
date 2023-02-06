@@ -6,6 +6,8 @@ import type {
   ChartOptions,
   CanvasItemRect,
   CanvasPointPositionType,
+  GridConfigType,
+  Series_ChartConfig,
 } from "./types";
 import type { FontConfigOptions, Position_DrawTextOptions } from "./Text";
 import type { ChartUseRectItemConfig } from "./Rectangle";
@@ -20,4 +22,6 @@ export type {
   CanvasPointPositionType,
   ContextType,
   ChartUseRectItemConfig,
+  GridConfigType,
+  Series_ChartConfig,
 };

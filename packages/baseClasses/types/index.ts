@@ -1,5 +1,11 @@
 import { ChartUseRectItemConfig, FontConfigOptions } from "../index";
-export { ChartOptions, CanvasItemRect, CanvasPointPositionType };
+export type {
+  ChartOptions,
+  CanvasItemRect,
+  CanvasPointPositionType,
+  GridConfigType,
+  Series_ChartConfig,
+};
 
 interface ChartOptions {
   backgroundColor: string;
@@ -10,10 +16,7 @@ interface ChartOptions {
     textStyle?: FontConfigOptions;
     subTextStyle?: FontConfigOptions;
   };
-  grid: {
-    topSpaceHeight: number;
-    bottomSpaceHeight: number;
-  };
+  grid: GridConfigType;
   legend: {
     x_ofChart: string;
     y_ofChart: string;
@@ -90,6 +93,12 @@ type Series_ChartConfig = {
     formatter?: Function;
   };
 } & (BarItemConfig | LineItemConfig);
+
+type GridConfigType = {
+  topSpaceHeight: number;
+  bottomSpaceHeight: number;
+  border_paddingWidth: number;
+};
 
 // const test: Series_ChartConfig = {
 //   name: "123",
