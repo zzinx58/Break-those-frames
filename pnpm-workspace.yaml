@@ -2,4 +2,3 @@ packages:
   - "shared/**"
   - "examples/**"
   - "packages/**"
-  - "docs/"

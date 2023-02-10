@@ -11,8 +11,24 @@
     "esModuleInterop": true,
     "lib": ["ESNext", "DOM"],
     "skipLibCheck": true,
-    "noEmit": true
+    "noEmit": true,
+    //改动开始部分
+    "allowJs": false
+    // "baseUrl": ".",
+    // "paths": {
+    //   "@/*": ["src/*"]
+    // },
+    // "types": ["pinia-plugin-persist", "node"],
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    //elmessage
+    //"**/*.d.ts"
+    // unplugin-auto-import => include auto-imports.d.ts in this file.
+    "./*.d.ts"
+  ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
