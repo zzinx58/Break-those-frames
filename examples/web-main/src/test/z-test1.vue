@@ -9,6 +9,7 @@ import {
   Chart_Line_2D,
   Chart_Rect_2D,
   Chart_Text_2D,
+  ContentDrawer,
   FontConfigOptions,
   LayoutEngine,
   Position_DrawTextOptions,
@@ -29,21 +30,56 @@ const data = {
 onMounted(() => {
   const containerDOM = document.getElementById("container-test");
   if (containerDOM) {
-    const ctx = new LayoutEngine(containerDOM, "2d", 1000)
-      .renderingContext as CanvasRenderingContext2D;
-    const lineItem = new Chart_Line_2D(
-      ctx,
-      {
-        start_x_coordinate: 0,
-        start_y_coordinate: 0,
-        end_x_coordinate: 200,
-        end_y_coordinate: 200,
-      },
-      {
-        line_color: "red",
-        lineWidth: 2,
-      }
-    );
+    const layoutEngine = new LayoutEngine(containerDOM, "2d", 1000, {
+      topSpaceHeight: 110,
+      bottomSpaceHeight: 95,
+    });
+    const ctx = layoutEngine.renderingContext as CanvasRenderingContext2D;
+    // const contentQueue = layoutEngine.getContentItemQueue();
+    // function drawTest() {
+    //   const chartContentSpaceRect = layoutEngine.chartContentSpaceRect;
+    //   const y_lineItem = new Chart_Line_2D(
+    //     ctx,
+    //     {
+    //       start_x_coordinate: chartContentSpaceRect.x_coordinate,
+    //       start_y_coordinate: chartContentSpaceRect.y_coordinate,
+    //       end_x_coordinate: chartContentSpaceRect.x_coordinate,
+    //       end_y_coordinate:
+    //         chartContentSpaceRect.height + chartContentSpaceRect.y_coordinate,
+    //     },
+    //     contentQueue
+    //   );
+    //   const x_lineItem = new Chart_Line_2D(
+    //     ctx,
+    //     {
+    //       start_x_coordinate: chartContentSpaceRect.x_coordinate,
+    //       start_y_coordinate:
+    //         chartContentSpaceRect.height + chartContentSpaceRect.y_coordinate,
+    //       end_x_coordinate:
+    //         chartContentSpaceRect.width + chartContentSpaceRect.x_coordinate,
+    //       end_y_coordinate:
+    //         chartContentSpaceRect.height + chartContentSpaceRect.y_coordinate,
+    //     },
+    //     contentQueue
+    //   );
+    // }
+    // drawTest();
+    // window.addEventListener("resize", () => {
+    //   layoutEngine.reRenderContent();
+    // });
+    // const lineItem = new Chart_Line_2D(
+    //   ctx,
+    //   {
+    //     start_x_coordinate: 0,
+    //     start_y_coordinate: 0,
+    //     end_x_coordinate: 200,
+    //     end_y_coordinate: 200,
+    //   },
+    //   {
+    //     line_color: "red",
+    //     lineWidth: 3,
+    //   }
+    // );
   }
 });
 </script>

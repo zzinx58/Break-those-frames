@@ -1,7 +1,7 @@
 import { Chart_Rect_2D } from "./Rectangle";
 import { Chart_Line_2D } from "./Line";
 import { Chart_Text_2D } from "./Text";
-import { LayoutEngine } from "./LayoutEngine_v2";
+import { LayoutEngine, Queue } from "./LayoutEngine_v2";
 import type {
   ChartOptions,
   CanvasItemRect,
@@ -11,7 +11,7 @@ import type {
 } from "./types";
 import type { FontConfigOptions, Position_DrawTextOptions } from "./Text";
 import type { ChartUseRectItemConfig } from "./Rectangle";
-import type { ContextType } from "./LayoutEngine_v2";
+import type { ContextType, ContentDrawer } from "./LayoutEngine_v2";
 
 export { Chart_Rect_2D, Chart_Text_2D, Chart_Line_2D, LayoutEngine };
 export type {
@@ -24,4 +24,6 @@ export type {
   ChartUseRectItemConfig,
   GridConfigType,
   Series_ChartConfig,
+  ContentDrawer,
+  Queue,
 };

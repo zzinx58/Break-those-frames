@@ -1,4 +1,4 @@
-import { CanvasContainer } from "../../topClasses/Container";
+import { CanvasContainer } from "../Container";
 import {
   CanvasItemRect,
   CanvasPointPositionType,
@@ -6,17 +6,25 @@ import {
   FontConfigOptions,
   GridConfigType,
 } from "../index";
-export { LayoutEngine };
-export type { ContextType };
+export { LayoutEngine, Queue };
+export type { ContextType, ContentDrawer };
+interface ContentDrawer {
+  drawItem(): void;
+}
 type ContextType = "2d" | "webgl2" | "bitmaprenderer";
+
 class LayoutEngine extends CanvasContainer {
   //TODO: Public for test use.
   //Some platform may forbiden the webgl ability,so RenderingContext's might be null;
   public renderingContext: RenderingContext | null;
-  protected chartContentSpaceRect: CanvasItemRect;
+  public chartContentSpaceRect: CanvasItemRect;
+  private finalGridConfig: GridConfigType;
+  private maxValue: number;
+  private contentItemQueue: Queue<ContentDrawer>;
   constructor(
     containerDOM: HTMLElement,
     contextType: ContextType,
+    //We need to calculate the default form display's string length of y_coordinate, so maxValue is needed.
     maxValue: number,
     gridConfig?: GridConfigType
   ) {
@@ -24,6 +32,7 @@ class LayoutEngine extends CanvasContainer {
     const ctx = this.canvasElement.getContext(
       contextType
     ) as CanvasRenderingContext2D;
+    this.contentItemQueue = new Queue<ContentDrawer>();
     this.renderingContext = ctx;
     const finalGridConfig =
       gridConfig ??
@@ -32,6 +41,7 @@ class LayoutEngine extends CanvasContainer {
         border_paddingWidth: 0,
         bottomSpaceHeight: 0,
       } as GridConfigType);
+    this.finalGridConfig = finalGridConfig;
     this.initChartContentSpace(ctx, finalGridConfig, maxValue);
   }
 
@@ -70,11 +80,23 @@ class LayoutEngine extends CanvasContainer {
       x_coordinate:
         actualChartSpace.x_coordinate + defaultCoordinateFontSizeInfo.fontWidth,
       y_coordinate: actualChartSpace.y_coordinate,
-      width: actualChartSpace.width - defaultCoordinateFontSizeInfo.fontWidth,
-      height: actualChartSpace.height,
+      width:
+        actualChartSpace.width - 2 * defaultCoordinateFontSizeInfo.fontWidth,
+      height:
+        actualChartSpace.height - defaultCoordinateFontSizeInfo.fontHeight,
     };
 
     this.chartContentSpaceRect = chartContentSpace;
+  }
+
+  public getContentItemQueue() {
+    return this.contentItemQueue;
+  }
+
+  public reRenderContent() {
+    this.reSizeOfContainer();
+    const ctx = this.renderingContext as CanvasRenderingContext2D;
+    this.initChartContentSpace(ctx, this.finalGridConfig, this.maxValue);
   }
 
   private _AggregateOfLayoutEngineNeededObj() {
@@ -114,5 +136,13 @@ class LayoutEngine extends CanvasContainer {
       result[name] = template_of_CanvasPointPosition;
       return result;
     }, Object.create(null));
+  }
+}
+
+class Queue<T> {
+  public itemQueue: Array<T> = [];
+
+  add(contentItem: T) {
+    this.itemQueue.push(contentItem);
   }
 }

@@ -1,3 +1,4 @@
+import { ContentDrawer } from "..";
 export { Chart_Text_2D };
 export type { FontConfigOptions, Position_DrawTextOptions };
 type FontBasicConfigOptions = {
@@ -34,7 +35,7 @@ type Position_DrawTextOptions = {
 };
 type FontConfigOptions = FillTextConfigOption & StrokeTextConfigOption;
 
-class Chart_Text_2D {
+class Chart_Text_2D implements ContentDrawer {
   private canvasRendingContext2D: CanvasRenderingContext2D;
   private message: string;
   //We will automatically set default value for the fontStyle, so fontConfigOptions could be undefined.
@@ -55,10 +56,10 @@ class Chart_Text_2D {
       y_coordinate: 0,
     };
     // this.test();
-    this.main_drawText();
+    this.drawItem();
   }
 
-  private main_drawText() {
+  public drawItem() {
     this.fontConfigOptions?.fillText_color && this.drawFillText();
     this.fontConfigOptions?.strokeText_color && this.drawStrokeText();
   }

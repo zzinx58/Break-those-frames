@@ -2,6 +2,7 @@ import { LayoutEngine, Series_ChartConfig } from "../index";
 import type { ContextType, ChartOptions } from "../index";
 export { LineOrBarChartLayoutEngine };
 class LineOrBarChartLayoutEngine extends LayoutEngine {
+  private heightScale: number;
   constructor(
     containerDOM: HTMLElement,
     contextType: ContextType,
@@ -12,6 +13,7 @@ class LineOrBarChartLayoutEngine extends LayoutEngine {
       dataArr.push.apply(dataArr, item.data);
     });
     const maxValue = Math.max(...dataArr);
-    super(containerDOM, contextType, chartOptions.grid, maxValue);
+    super(containerDOM, contextType, maxValue, chartOptions.grid);
+    this.heightScale = this.chartContentSpaceRect.height / maxValue;
   }
 }

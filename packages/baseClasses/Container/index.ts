@@ -1,12 +1,11 @@
 export { CanvasContainer };
+
 class CanvasContainer {
   //CanvasContainer's actual bearing element
   private containerDOM: HTMLElement;
   //CanvasContainer's Info realte to the viewport
   protected containerInfo_RelateToViewport: DOMRect;
-  //CanvasContainer's Content：CanvasElement
   protected canvasElement: HTMLCanvasElement;
-  // protected canvasElement: HTMLCanvasElement;
   protected canvasSizeInfo: { height: number; width: number };
 
   constructor(containerDOM: HTMLElement) {
@@ -22,7 +21,8 @@ class CanvasContainer {
   }
 
   //setup canvas
-  private initCanvas(
+  //Notice: Resizing Canvas will clear its content, we have to redraw our graphics.
+  public initCanvas(
     canvasElement: HTMLCanvasElement,
     containerSizeInfo: DOMRect
   ) {
@@ -38,8 +38,10 @@ class CanvasContainer {
     this.canvasSizeInfo = canvasSizeInfo;
   }
 
-  //TODO:For resize use.
-  public render() {}
+  public reSizeOfContainer() {
+    const newContainerSizeInfo = this.containerDOM.getBoundingClientRect();
+    this.initCanvas(this.canvasElement, newContainerSizeInfo);
+  }
 }
 
 //Dont konw if this method is necessary.

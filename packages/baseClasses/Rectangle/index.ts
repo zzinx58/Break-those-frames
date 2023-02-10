@@ -1,4 +1,4 @@
-import { CanvasItemRect, CanvasPointPositionType } from "..";
+import { CanvasItemRect, CanvasPointPositionType, ContentDrawer } from "..";
 
 export { Chart_Rect_2D };
 export type { ChartUseRectItemConfig };
@@ -27,20 +27,23 @@ type UserRectItemConfig =
       fillRect_color: string;
       strokeRect_color: string;
     } & RectConfigUnionType);
-class Chart_Rect_2D {
+class Chart_Rect_2D implements ContentDrawer {
   private renderingContext: CanvasRenderingContext2D;
   //For RendingEngine use.
   public centerPoint: CanvasPointPositionType;
+  private userRectItemConfig: UserRectItemConfig;
   constructor(
     canvasRendingContext2D: CanvasRenderingContext2D,
     user_rectItemConfig: UserRectItemConfig
   ) {
     this.renderingContext = canvasRendingContext2D;
-    this.main_drawRect(user_rectItemConfig);
+    this.userRectItemConfig = user_rectItemConfig;
+    this.drawItem();
     this.findCenterPoint(user_rectItemConfig.rectangleBounds);
   }
 
-  private main_drawRect(userRectItemConfig: UserRectItemConfig) {
+  public drawItem() {
+    const userRectItemConfig = this.userRectItemConfig;
     const ctx = this.renderingContext;
     ctx.save();
     const { x_coordinate, y_coordinate, height, width } =
