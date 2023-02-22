@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev:web-main": "pnpm --filter web-main run dev"
+    "dev:web-main": "pnpm --filter web-main run dev",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
   },
   "keywords": [],
   "author": "",
@@ -13,6 +16,7 @@
   "dependencies": {
     "@vueuse/core": "^9.10.0",
     "axios": "^1.2.2",
+    "css-select": "^5.1.0",
     "element-plus": "^2.2.28",
     "file-saver": "^2.0.5",
     "mockjs": "^1.1.0",
@@ -37,6 +41,7 @@
     "unplugin-icons": "^0.15.1",
     "unplugin-vue-components": "^0.22.12",
     "vite": "^4.0.0",
+    "vitepress": "1.0.0-alpha.46",
     "vue-tsc": "^1.0.11"
   }
 }

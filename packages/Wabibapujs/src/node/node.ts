@@ -1,8 +1,13 @@
 //This tells the TypeScript compiler to include the DOM typings, which should include WindowEventMap.
 /// <reference lib="dom" />
-import { NodeReadOnlyProperty, UserInputAttri } from "./../attribute/node";
-import Attr, { NodeAttris } from "../attribute/node";
-import { BaseNodeAttributes } from "../attribute/types";
+import { UserInputAttri } from "./../attribute/node";
+// import Attr from "../attribute/node";
+import NodeAttr from "../attribute/node";
+// import BlockAttr from "../attribute/block";
+// import LabelAttr from "../attribute/label";
+// import Block from "./block";
+// import Label from "./label"
+import { BaseNodeAttributes, NodeAttris } from "../attribute/types";
 import { TargetEvents } from "./scene";
 
 type EventOptions = {
@@ -22,16 +27,15 @@ type EventOptions = {
   once?: boolean;
 };
 
-type NodeAttrVar = Omit<Attr, NodeReadOnlyProperty>;
-
 export type EventListenersManager = {
   [type in TargetEvents]?: Array<{ listener: Function; once?: boolean }>;
 };
 
 export default class Node {
   //When setting a class as another class's static property, only the properties with setter/getter in before one will be available.
-  static Attr = Attr;
-  protected _attributes: Attr;
+  static Attr = NodeAttr;
+  protected _attributes: NodeAttr;
+  // protected _attributes: NodeAttr;
   private _parent:
     | undefined
     | { opacity: number; forceUpdate: Function; layer: any };
@@ -42,9 +46,12 @@ export default class Node {
     this._eventListeners = {};
     this._captureEventListeners = {};
     //WTF...? What's the differ between this and that?. Seems like no differs.
-    // this._attributes = new Attr(this);
+    // this._attributes = new Attr();
     //Object.assign() will not call the setter method directly, only if the this.attributes object has properties with setters defined in another class, then setting the values of these propertires through Object.assign() will indirectly call the setter functions. Which we did at the following code.
-    this._attributes = new (this.constructor as typeof Node).Attr();
+    //Amazing!....
+    // this._attributes = new (this.constructor as typeof Node).Attr();
+    //@ts-ignore
+    this._attributes = new this.constructor.Attr();
     this._attributes.setSubject(this);
     Object.assign(this._attributes, attris);
   }

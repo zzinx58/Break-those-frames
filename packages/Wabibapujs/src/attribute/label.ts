@@ -19,7 +19,7 @@ const labelDefaultConst: LabelOptions = {
   textBaseLine: "alphabetic",
 };
 
-export class Label extends Block {
+export default class Label extends Block {
   constructor() {
     super();
     this.setDefault(labelDefaultConst);

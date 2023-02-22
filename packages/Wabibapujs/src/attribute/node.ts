@@ -1,5 +1,5 @@
 import { compareValue } from "../utils/aboutAttributeValue";
-import { BaseNodeAttributes, BlockOptions, LabelOptions } from "./types";
+import { BaseNodeAttributes, NodeAttris } from "./types";
 
 const nodeDefaultConst: BaseNodeAttributes = {
   id: "",
@@ -32,11 +32,6 @@ function setTransform<
   if (type === "rotate") value = (Math.PI * value) / 180;
   console.log(value);
 }
-
-export type NodeAttris = Partial<
-  BaseNodeAttributes & BlockOptions & LabelOptions
-  // & AnyAttris
->;
 
 export type NodeReadOnlyProperty = "attributes";
 

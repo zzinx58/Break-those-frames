@@ -96,3 +96,10 @@ export type AnyAttris = { [key: string]: any };
 export type BlockAttributes = BaseNodeAttributes & BlockOptions;
 export type LabelAttributes = BaseNodeAttributes & BlockOptions & LabelOptions;
 export type RectAttributes = BasePathAttributes & RectOptions;
+
+export type NodeAttris = Partial<
+  BaseNodeAttributes & BlockOptions & LabelOptions
+  // & AnyAttris
+>;
+export type BlockAttris = Partial<BlockAttributes>;
+export type LabelAttris = Partial<LabelAttributes>;
