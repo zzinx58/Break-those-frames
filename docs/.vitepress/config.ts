@@ -18,9 +18,17 @@ export default defineConfig({
       link: "/en/",
     },
   },
-  head: [["link", { rel: "icon", href: "/logo_transparent.png" }]],
+  head: [
+    [
+      "link",
+      {
+        rel: "icon",
+        href: "https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/259f68bf2d76430c9d70236d4057e6dc~tplv-k3u1fbpfcp-watermark.image?",
+      },
+    ],
+  ],
   themeConfig: {
-    logo: "logo_transparent.png",
+    logo: "https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/259f68bf2d76430c9d70236d4057e6dc~tplv-k3u1fbpfcp-watermark.image?",
     i18nRouting: true,
     siteTitle: "Wabibapujs",
     lastUpdatedText: "Updated Date",
